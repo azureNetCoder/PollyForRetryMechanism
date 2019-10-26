@@ -18,13 +18,20 @@ namespace PollyForRetryMechanism
             var httpHandler = HttpCaller.Get(inValidHttpUrl).ConfigureAwait(false);
 
             // Deserializing the http response content to an object //
-            var modelObject = JsonConvert.DeserializeObject<List<Model>>(httpHandler.GetAwaiter().GetResult()
-                                                                        .Content.ReadAsStringAsync()
-                                                                        .ConfigureAwait(false).GetAwaiter().GetResult());
-
-            foreach(var item in modelObject)
+            if (httpHandler.GetAwaiter().GetResult().StatusCode == System.Net.HttpStatusCode.OK)
             {
-                Console.WriteLine($"Name: {item.name}");
+                var modelObject = JsonConvert.DeserializeObject<List<Model>>(httpHandler.GetAwaiter().GetResult()
+                                                                            .Content.ReadAsStringAsync()
+                                                                            .ConfigureAwait(false).GetAwaiter().GetResult());
+
+                foreach (var item in modelObject)
+                {
+                    Console.WriteLine($"Name: {item.name}");
+                }
+            }
+            else
+            {
+                Console.WriteLine($" Error with status code: {httpHandler.GetAwaiter().GetResult().StatusCode} on request to url : {httpHandler.GetAwaiter().GetResult().RequestMessage.RequestUri}");
             }
 
             Console.ReadKey();
