@@ -10,7 +10,7 @@ namespace PollyForRetryMechanism
         static void Main(string[] args)
         {
             // Calling the HttpCaller class & Get method within the class to return an HttpResponseMessage type //
-            var httpHandler = HttpCaller.Get(ConfigReader.GetSettings<string>(ConfigKeyConstants.ValidUrl)).ConfigureAwait(false);
+            var httpHandler = HttpCaller.Get(ConfigReader.GetSettings(ConfigKeyConstants.ValidUrl)).ConfigureAwait(false);
 
             // Deserializing the http response content to an object //
             if (httpHandler.GetAwaiter().GetResult().StatusCode == HttpStatusCode.OK)

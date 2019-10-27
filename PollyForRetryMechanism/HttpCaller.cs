@@ -14,12 +14,11 @@ namespace PollyForRetryMechanism
             try
             {
                 // Wrapping the http call within the executeWaitRetryOnTransientFailure method //
-                return await ExecuteWaitRetryOnTransientFailure(() => httpRequest.GetAsync(Uri));
+                return await ExecuteWaitRetryOnTransientFailure(() => httpRequest.GetAsync(Uri)).ConfigureAwait(false);
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
-                throw;
+                throw new InvalidOperationException(ex.Message);
             }
         }
 

@@ -11,7 +11,7 @@ namespace PollyForRetryMechanism
         /// <typeparam name="T">type of param</typeparam>
         /// <param name="key">value of the key in app.config,</param>
         /// <returns>value of the key passed as input param.</returns>
-        public static string GetSettings<T>(string key)
+        public static string GetSettings(string key)
         {
             if (!string.IsNullOrEmpty(key))
             {
