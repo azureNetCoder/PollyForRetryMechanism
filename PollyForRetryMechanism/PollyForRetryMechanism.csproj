@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConfigReader.cs" />
     <Compile Include="HttpCaller.cs" />
     <Compile Include="Model.cs" />
     <Compile Include="Program.cs" />
